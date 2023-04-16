@@ -1,0 +1,10 @@
+body{
+    background-image: url("map.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#data{
+    color: white;
+    font-weight: 600;
+}
