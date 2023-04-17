@@ -6,17 +6,36 @@ const mongoose=require("mongoose");
 const jwt=require("jsonwebtoken");
 
 //**************************** */
-mongoose.connect("mongodb://127.0.0.1:27017/userData")
-.then(()=>{
- console.log("connection with database successfully");
-})
-.catch((err)=>{
-    console.log(err);
-})
+// mongoose.connect("mongodb://127.0.0.1:27017/userData")
+// .then(()=>{
+//  console.log("connection with database successfully");
+// })
+// .catch((err)=>{
+//     console.log(err);
+// })
 const db=mongoose.connection;
 const app=express();
 // ******************************/
-
+// atlas connection
+// code for connection detabase
+const dotenv = require("dotenv");
+dotenv.config({path:'./config.env'});
+const detabaseconnection = async () => {
+    try {
+        // "mongodb://localhost:27017/myfirstdatabase"
+       // console.log(process.env.MONGODB_URL)
+        await mongoose.connect(`mongodb+srv://akashsingh101201:1234@cluster0.hj5seyb.mongodb.net/test`, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
+        console.log("detabase is connected");
+    }
+    catch (e) {
+        console.log(e.message);
+    }
+};
+//detabaseconnection();
+//
 const Registration = require("./model/schema.js")
 const port=process.env.PORT || 5000;
 const static_path=path.join(__dirname,"../Public");
@@ -185,3 +204,4 @@ app.get("/leaderboard/leader", (req,res)=>{
 app.listen(port,()=>{
     console.log("connected succefullly with 5000");
 })
+detabaseconnection();
